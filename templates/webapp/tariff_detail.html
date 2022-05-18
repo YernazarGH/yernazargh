@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    {{ tariff.title }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Гигабайты: {{ tariff.gb }}</h5>
+    <h5 class="card-title">Минуты: {{ tariff.min }}</h5>
+    <h5 class="card-title">СМС: {{ tariff.sms }}</h5>
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'create_mytariff' tariff.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger">Выбрать тариф</button>
+        </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

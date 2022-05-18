@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+    <h1>Личная страница пользователя {{ user_obj.get_full_name|default:user_obj.username }}</h1>
+    <div>
+        <div style="margin: 20px">
+            <p><span class="bold">Имя пользователя: </span>{{ user_obj.username }}</p>
+            <p><span class="bold">Имя: </span>{{ user_obj.first_name }}</p>
+            <p><span class="bold">Фамилия: </span>{{ user_obj.last_name }}</p>
+            <p><span class="bold">Email: </span>{{ user_obj.email }}</p>
+            {% include 'partial/webapp/mytariff.html' with mytariff=user_obj.tariffs.last %}
+        </div>
+    </div>
+{% endblock %}

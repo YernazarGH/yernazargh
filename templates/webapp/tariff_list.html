@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Тарифные планы</h2>
+    <form >
+        <div class="mb-3 row">
+            <label for="searchgb" class="col-sm-2 col-form-label">Гигабайт</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="searchgb" name="searchgb">
+                </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="searchmin" class="col-sm-2 col-form-label">Минуты</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="searchmin" name="searchmin">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="searchsms" class="col-sm-2 col-form-label">SMS</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="searchsms" name="searchsms">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Поиск</button>
+    </form>
+    <div style="display: flex; margin: 5px 0">
+    {% for tariff in tariffs %}
+                <div class="card" style="width: 25%; margin: 5px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ tariff.title }}</h5>
+                        <p class="card-text">Гигабайт: {{ tariff.gb }}</p>
+                        <p class="card-text">Минуты: {{ tariff.min }}</p>
+                        <p class="card-text">СМС: {{ tariff.sms }}</p>
+                            <a href="{% url 'tariff_detail' tariff.pk %}" class="btn btn-primary">Посмотреть тариф</a>
+                    </div>
+                </div>
+    {% endfor %}
+    </div>
+{% endblock %}
